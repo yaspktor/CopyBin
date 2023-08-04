@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js" integrity="sha512-rdhY3cbXURo13l/WU9VlaRyaIYeJ/KBakckXIvJNAQde8DgpOmE+eZf7ha4vdqVjTtwQt69bD2wH2LXob/LB7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/solarized-dark.min.css" integrity="sha512-kBHeOXtsKtA97/1O3ebZzWRIwiWEOmdrylPrOo3D2+pGhq1m+1CroSOVErIlsqn1xmYowKfQNVDhsczIzeLpmg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/styles.css">
+    <script>hljs.highlightAll();</script>
+    <title>CopyBin</title>
+</head>
+<body>
+    <%- include("_buttons.ejs") %>
+    <div class="wrapper">
+        <div class="line-numbers">
+
+            <% for (let i = 1; i <= lineNumbers; i++) { %>
+
+                <div><%= i %></div>
+
+            <%} %>
+                  
+        </div>
+        <pre><code id="code-display"  
+            class="<%= locals.language ? `language-${locals.language}` : "" %> "><%= name %></code>
+        </pre>
+    </div>
+    <script>
+        document.getElementById("copy-button").addEventListener("click", function() {
+            // Pobierz tekst, który chcesz skopiować
+            const textToCopy = document.getElementById("code-display").innerText;
+    
+            // Utwórz tymczasowy element input, umieść w nim tekst i skopiuj do schowka
+            const tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+    
+            alert("Skopiowano do schowka: " + textToCopy);
+        });
+    </script>
+</body>
+</html>

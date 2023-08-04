@@ -1,0 +1,14 @@
+<div class="buttons-wrapper">
+    <a href="/" class="logo">CopyBin</a>
+    <div class="buttons">
+        <a href="/new" class="button">New</a>
+        <% if (locals.canSave) { %>
+            <button type="submit" class="button">Save</button>
+        <% } %>
+        <button type="button" class="button" id="copy-button">Copy</button>
+        <% if (locals.canDownload) { %>
+            <a href="/download/<%= id %>" class="button" id="download-button" >Download</a>
+        
+        <% } %>
+    </div>
+</div>
